@@ -1,8 +1,30 @@
-<h1>Here are places</h1>
+<% include partials/header %>
 
-<% places.forEach(function(place) { %>
-    <div>
-        <h4><%= place.name %></h4>
-        <img src="<%= place.image%>">
+<div class="container">
+    <header class="jumbotron">
+        <div class="container">
+            <h1>Places to Explore</h1>
+            <p>Travelling Ideas Inspired</p>
+            <p>
+                <a class="btn btn-primary btn-lg" href="/places/new">New Place</a>
+            </p>
+        </div>
+    </header>
+
+
+    <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <% places.forEach(function(place) { %>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="<%= place.image%>">
+                    <div class="caption">
+                        <h4><%= place.name %></h4>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
     </div>
-<% }) %>
+
+</div>
+
+<% include partials/footer %>
