@@ -1,0 +1,23 @@
+{
+  "name": "travelblog",
+  "version": "1.0.0",
+  "description": "web app to chronicle Dk travelling",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dkcountry/TravelBlog.git"
+  },
+  "author": "DK",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dkcountry/TravelBlog/issues"
+  },
+  "homepage": "https://github.com/dkcountry/TravelBlog#readme",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.16.3"
+  }
+}
