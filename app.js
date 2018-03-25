@@ -10,6 +10,8 @@ const Comment   = require("./models/comment");
 mongoose.connect("mongodb://localhost/travel_blog")
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static('./public'));
+
 seedDB();
 
 app.get("/", function(req, res) {
@@ -49,7 +51,6 @@ app.get("/places/:id", function(req, res) {
         if (err) {
             console.log(err);
         } else {
-            console.log(foundPlace);
             res.render("places/show", {place: foundPlace});
         }
     });
