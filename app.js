@@ -2,19 +2,12 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const Place = require("./models/places");
 
 mongoose.connect("mongodb://localhost/travel_blog")
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 
-//Schema Setup
-const placeSchema = new mongoose.Schema({
-    name: String,
-    image: String,
-    description: String
-});
-
-const Place = mongoose.model("Place", placeSchema);
 
 // Place.create({  name: "Peru", 
 //                 image: "https://lonelyplanetwp.imgix.net/2018/01/Machu_Picchu-694dbac6b0e5.jpg?crop=entropy&fit=crop&h=421&sharp=10&vib=20&w=748", 
