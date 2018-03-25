@@ -3,34 +3,14 @@ const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const Place = require("./models/places");
+const seedDB = require("./seeds");
+const Comment   = require("./models/comment");
+
 
 mongoose.connect("mongodb://localhost/travel_blog")
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
-
-
-// Place.create({  name: "Peru", 
-//                 image: "https://lonelyplanetwp.imgix.net/2018/01/Machu_Picchu-694dbac6b0e5.jpg?crop=entropy&fit=crop&h=421&sharp=10&vib=20&w=748", 
-//                 description: "Incan people live here"},
-//                 function(err, place) {
-//     if (err) {
-//         console.log(err);
-//     } else {
-//         console.log(place);
-//     }
-// })
-
-let places = [
-    {name: "China", image: "http://airpano.ru/files/China-Great-Wall/images/image1.jpg"},
-    {name: "Peru", image: "https://lonelyplanetwp.imgix.net/2018/01/Machu_Picchu-694dbac6b0e5.jpg?crop=entropy&fit=crop&h=421&sharp=10&vib=20&w=748"},
-    {name: "Spain", image: "https://www.aifsabroad.com/images/country-page/aifsabroad-share-image-Barcelona.jpg"},
-    {name: "China", image: "http://airpano.ru/files/China-Great-Wall/images/image1.jpg"},
-    {name: "Peru", image: "https://lonelyplanetwp.imgix.net/2018/01/Machu_Picchu-694dbac6b0e5.jpg?crop=entropy&fit=crop&h=421&sharp=10&vib=20&w=748"},
-    {name: "Spain", image: "https://www.aifsabroad.com/images/country-page/aifsabroad-share-image-Barcelona.jpg"},
-    {name: "China", image: "http://airpano.ru/files/China-Great-Wall/images/image1.jpg"},
-    {name: "Peru", image: "https://lonelyplanetwp.imgix.net/2018/01/Machu_Picchu-694dbac6b0e5.jpg?crop=entropy&fit=crop&h=421&sharp=10&vib=20&w=748"},
-    {name: "Spain", image: "https://www.aifsabroad.com/images/country-page/aifsabroad-share-image-Barcelona.jpg"}
-];
+seedDB();
 
 app.get("/", function(req, res) {
     res.render("landing");
@@ -41,7 +21,7 @@ app.get("/places", function(req, res) {
         if (err) {
             console.log(err);
         } else {
-            res.render("index", {places: places});
+            res.render("places/index", {places: places});
         }
     });
 })
@@ -61,19 +41,51 @@ app.post("/places", function(req, res) {
 });
 
 app.get("/places/new", function(req, res) {
-    res.render("new");
+    res.render("places/new");
 });
 
 app.get("/places/:id", function(req, res) {
-    Place.findById(req.params.id.replace(/\s/g,''), function(err, foundPlace) {
+    Place.findById(req.params.id.replace(/\s/g,'')).populate("comments").exec(function(err, foundPlace) {
         if (err) {
             console.log(err);
-            console.log('erererer');
         } else {
-            res.render("show", {place: foundPlace});
+            console.log(foundPlace);
+            res.render("places/show", {place: foundPlace});
         }
     });
 });
+
+// ==========
+// Comment Routes
+
+app.get("/places/:id/comments/new", function(req, res){
+    Place.findById(req.params.id.replace(/\s/g,''), function(err, place){
+        if(err){
+            console.log(err);
+        } else{
+            res.render("comments/new", {place: place});
+        }
+    });
+});
+
+app.post("/places/:id/comments", function(req, res){
+    Place.findById(req.params.id.replace(/\s/g,''), function(err, place){
+        if(err){
+            console.log(err);
+            res.redirect("/places");
+        } else{
+            Comment.create(req.body.comment, function(err, comment){
+                if(err){
+                    console.log(err);
+                } else{
+                    place.comments.push(comment);
+                    place.save();
+                    res.redirect("/places/" + place._id);
+                }
+            })
+        }
+    });
+})
 
 app.listen("3000", "localhost", function() {
     console.log("TravelBlog Server Running..")

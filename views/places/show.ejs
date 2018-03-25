@@ -1,0 +1,15 @@
+<% include ../partials/header %>
+
+<h1><%= place.name %></h1>
+
+<img src="<%= place.image %>">
+
+<p><%= place.description %></p>
+
+<a class='btn btn-success' href="/places/<%=place._id%>/comments/new">Add New Comment</a>
+
+<% place.comments.forEach(function(comment) { %>
+    <p><%= comment.author%> - <%=comment.text%></p>
+<% }) %>
+
+<% include ../partials/footer %>
