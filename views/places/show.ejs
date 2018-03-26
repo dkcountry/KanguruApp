@@ -20,6 +20,9 @@
                         <%= place.name %>
                     </a></h4>
                     <p><%= place.description %></p>
+                    <p>
+                        <em>Submitted by <%=place.author.username%></em>
+                    </p>
                 </div>
             </div>
             <div class="well">
@@ -30,7 +33,7 @@
                 <% place.comments.forEach(function(comment) { %>
                     <div class="row">
                         <div class="col-md-12">
-                            <%= comment.author%>
+                            <%= comment.author.username%>
                             <span class='pull-right'>10 days ago</span>
                             <p><%=comment.text%></p>
                         </div>

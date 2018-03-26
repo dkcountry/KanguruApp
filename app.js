@@ -17,7 +17,7 @@ mongoose.connect("mongodb://localhost/travel_blog")
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('./public'));
-seedDB();
+// seedDB();    //seed the db
 
 //PASSPORT CONFIG
 app.use(require("express-session")({
