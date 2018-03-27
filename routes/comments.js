@@ -42,4 +42,29 @@ router.post("/", isLoggedIn, function(req, res){
     });
 });
 
+//edit comments
+router.get("/:comment_id/edit", function(req, res){
+    Comment.findById(req.params.comment_id.replace(/\s/g,''), function(err, foundComment){
+        if(err){
+            res.redirect("back");
+        } else{
+            res.render("comments/edit", {
+                place_id: req.params.id.replace(/\s/g,''),
+                comment: foundComment
+            })
+        }
+    })
+})
+
+//update comments
+router.put("/:comment_id", function(req, res){
+    Comment.findByIdAndUpdate(req.params.comment_id.replace(/\s/g,''), req.body.comment, function(err){
+        if(err){
+            res.redirect("back");
+        } else {
+            res.redirect("/places/"+ req.params.id.replace(/\s/g,''))
+        }
+    })
+});
+
 module.exports = router;
