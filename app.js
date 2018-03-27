@@ -7,6 +7,7 @@ const express = require("express"),
       User = require("./models/user"),
       Place = require("./models/places"),
       seedDB = require("./seeds"),
+      methodOverride = require("method-override"),
       Comment   = require("./models/comment");
 
 const commentRoutes = require("./routes/comments"),
@@ -17,6 +18,7 @@ mongoose.connect("mongodb://localhost/travel_blog")
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('./public'));
+app.use(methodOverride("_method"));
 // seedDB();    //seed the db
 
 //PASSPORT CONFIG

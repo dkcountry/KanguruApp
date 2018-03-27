@@ -9,6 +9,24 @@ const isLoggedIn = (req, res, next) => {
     res.redirect("/login");
 };
 
+const checkOwnership = (req, res, next) => {
+    if(req.isAuthenticated()){
+        Place.findById(req.params.id.replace(/\s/g,''), function(err, foundPlace){
+            if(err){
+                res.redirect("back");
+            } else {
+                if(foundPlace.author.id.equals(req.user._id)) {
+                    next();
+                } else {
+                    res.redirect("back");
+                }
+            }
+        })
+    } else {
+        res.redirect("back");
+    }
+}
+
 
 //INDEX - show all places
 router.get("/", function(req, res) {
@@ -51,6 +69,35 @@ router.get("/:id", function(req, res) {
         } else {
             res.render("places/show", {place: foundPlace});
         }
+    });
+});
+
+//edit place route
+router.get("/:id/edit", checkOwnership, function(req, res){
+        Place.findById(req.params.id.replace(/\s/g,''), function(err, foundPlace){
+            if(err){
+                res.redirect("/places");
+            } else {
+                    res.render("places/edit", {place: foundPlace});
+            }
+        });
+});
+
+//update place route
+router.put("/:id", checkOwnership, function(req, res){
+    Place.findByIdAndUpdate(req.params.id.replace(/\s/g,''), req.body.place, function(err, updatedPlace){
+        if(err){
+            res.redirect("/places");
+        } else{
+            res.redirect("/places/" + updatedPlace._id);
+        }
+    });
+});
+
+//destroy route
+router.delete("/:id", checkOwnership, function(req, res){
+    Place.findByIdAndRemove(req.params.id.replace(/\s/g,''), function(err){
+        res.redirect("/places");
     });
 });
 
