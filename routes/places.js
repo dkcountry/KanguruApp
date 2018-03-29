@@ -1,31 +1,7 @@
 const express = require("express");
 const router = express.Router({mergeParams: true});
 const Place = require("../models/places");
-
-const isLoggedIn = (req, res, next) => {
-    if(req.isAuthenticated()){
-        return next();
-    }
-    res.redirect("/login");
-};
-
-const checkOwnership = (req, res, next) => {
-    if(req.isAuthenticated()){
-        Place.findById(req.params.id.replace(/\s/g,''), function(err, foundPlace){
-            if(err){
-                res.redirect("back");
-            } else {
-                if(foundPlace.author.id.equals(req.user._id)) {
-                    next();
-                } else {
-                    res.redirect("back");
-                }
-            }
-        })
-    } else {
-        res.redirect("back");
-    }
-}
+const middleware = require("../middleware");
 
 
 //INDEX - show all places
@@ -39,7 +15,7 @@ router.get("/", function(req, res) {
     });
 })
 
-router.post("/", isLoggedIn, function(req, res) {
+router.post("/", middleware.isLoggedIn, function(req, res) {
     let name = req.body.name;
     let image = req.body.image;
     let desc = req.body.description;
@@ -58,7 +34,7 @@ router.post("/", isLoggedIn, function(req, res) {
     });
 });
 
-router.get("/new", isLoggedIn, function(req, res) {
+router.get("/new", middleware.isLoggedIn, function(req, res) {
     res.render("places/new");
 });
 
@@ -73,7 +49,7 @@ router.get("/:id", function(req, res) {
 });
 
 //edit place route
-router.get("/:id/edit", checkOwnership, function(req, res){
+router.get("/:id/edit", middleware.checkOwnership, function(req, res){
         Place.findById(req.params.id.replace(/\s/g,''), function(err, foundPlace){
             if(err){
                 res.redirect("/places");
@@ -84,7 +60,7 @@ router.get("/:id/edit", checkOwnership, function(req, res){
 });
 
 //update place route
-router.put("/:id", checkOwnership, function(req, res){
+router.put("/:id", middleware.checkOwnership, function(req, res){
     Place.findByIdAndUpdate(req.params.id.replace(/\s/g,''), req.body.place, function(err, updatedPlace){
         if(err){
             res.redirect("/places");
@@ -95,7 +71,7 @@ router.put("/:id", checkOwnership, function(req, res){
 });
 
 //destroy route
-router.delete("/:id", checkOwnership, function(req, res){
+router.delete("/:id", middleware.checkOwnership, function(req, res){
     Place.findByIdAndRemove(req.params.id.replace(/\s/g,''), function(err){
         res.redirect("/places");
     });
