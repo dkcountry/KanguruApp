@@ -2,6 +2,7 @@ const express = require("express"),
       app = express(),
       bodyParser = require("body-parser"),
       mongoose = require("mongoose"),
+      flash = require("connect-flash"),
       passport = require("passport"),
       LocalStrategy = require("passport-local"),
       User = require("./models/user"),
@@ -17,6 +18,7 @@ const commentRoutes = require("./routes/comments"),
 mongoose.connect("mongodb://localhost/travel_blog")
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(flash());
 app.use(express.static('./public'));
 app.use(methodOverride("_method"));
 // seedDB();    //seed the db
@@ -36,6 +38,8 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
     next();
 });
 

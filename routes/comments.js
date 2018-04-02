@@ -30,6 +30,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
                     comment.save();
                     place.comments.push(comment);
                     place.save();
+                    req.flash("success", "Successfully added comment");
                     res.redirect("/places/" + place._id);
                 }
             })
@@ -68,6 +69,7 @@ router.delete("/:comment_id", middleware.checkCommentOwnership, function(req, re
         if(err) {
             res.redirect("back");
         } else {
+            req.flash("success", "Comment Deleted");
             res.redirect("/places/" + req.params.id.replace(/\s/g,''))
         }
     })
