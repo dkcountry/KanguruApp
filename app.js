@@ -15,7 +15,9 @@ const commentRoutes = require("./routes/comments"),
       placeRoutes = require("./routes/places"),
       indexRoutes = require("./routes/index");
 
-mongoose.connect("mongodb://localhost/travel_blog")
+// mongoose.connect("mongodb://localhost/travel_blog")
+mongoose.connect("mongodb://dk:dk@ds235239.mlab.com:35239/kanguru");
+
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(flash());
