@@ -49,6 +49,6 @@ app.use("/", indexRoutes);
 app.use("/places/:id/comments", commentRoutes);
 app.use("/places", placeRoutes);
 
-app.listen("3000", "localhost", function() {
+app.listen(process.env.PORT || 3000, function() {
     console.log("TravelBlog Server Running..");
 });
