@@ -9,3 +9,32 @@
 .delete-form {
     display: inline;
 }
+
+@media (min-width: 600px) {
+    #index-blogs {
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+}
+
+.ind-blog {
+    height: auto;
+}
+
+.desc {
+    padding-left: 2em;
+    text-align: left;
+}
+
+.divider {
+    height: 1px;
+    width:100%;
+    display:block; /* for use on default inline elements like span */
+    margin: 9px 0;
+    overflow: hidden;
+    background-color: #e5e5e5;
+  }
+
+  .author-index {
+      display: inline;
+  }
