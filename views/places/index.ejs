@@ -3,27 +3,37 @@
 <div class="container">
     <header class="jumbotron">
         <div class="container">
-            <h1>Places to Explore</h1>
-            <p>Inspired Travelling Itineraries </p>
+            <h1>Explore the World</h1>
+            <p>Inspired Itineraries </p>
             <p>
                 <a class="btn btn-primary btn-lg" href="/places/new">New Place</a>
             </p>
         </div>
     </header>
+</div>
 
-
+<div id='index-blogs' class="container">
     <div class="row text-center" style="display:flex; flex-wrap: wrap;">
         <% places.forEach(function(place) { %>
-            <div class="col-md-3 col-sm-6">
-                <div class="thumbnail">
-                    <img src="<%= place.image%>">
-                    <div class="caption">
-                        <h4><%= place.name %></h4>
+            <div class="ind-blog col-sm-12">
+                <div class="col-md-4 col-sm-4">
+                    <div class="thumbnail">
+                        <img src="<%= place.image%>">
                     </div>
+                    <div class="caption">
+                            <h4><%= place.name %></h4>
+                    </div>
+                </div>
+                <div class=" desc col-md-4 col-sm-4">
+                   <p> <%=place.description.substring(0,100) %>... %> </p>
+                   <em>Visited by <%=place.author.username %></em>
+                </div>
+                <div class="col-md-4 col-sm-4" style="text-align: right">
                     <p>
-                        <a href="/places/ <%= place._id %>" class="btn btn-primary">More Info</a>
+                        <a href="/places/ <%= place._id %>" class="btn btn-primary">Read More</a>
                     </p>
                 </div>
+                <div class='divider'></div>
             </div>
         <% }) %>
     </div>
