@@ -17,6 +17,13 @@
     }
 }
 
+@media (min-width: 600px) {
+    #index-places {
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+}
+
 .ind-blog {
     height: auto;
 }

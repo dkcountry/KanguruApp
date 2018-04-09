@@ -7,18 +7,20 @@ const express = require("express"),
       LocalStrategy = require("passport-local"),
       User = require("./models/user"),
       Place = require("./models/places"),
+      Itinerary = require("./models/itinerary"),
       seedDB = require("./seeds"),
       methodOverride = require("method-override"),
       Comment   = require("./models/comment");
 
 const commentRoutes = require("./routes/comments"),
       placeRoutes = require("./routes/places"),
-      indexRoutes = require("./routes/index");
+      indexRoutes = require("./routes/index"),
+      itineraryRoutes = require("./routes/itinerary"),
+      userRoutes = require("./routes/user");
 
 // mongoose.connect("mongodb://localhost/travel_blog")
 // mongoose.connect("mongodb://dk:dk@ds235239.mlab.com:35239/kanguru");
 mongoose.connect(process.env.DATABASEURL);
-console.log(process.env.DATABASEURL);
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
@@ -50,6 +52,22 @@ app.use(function(req, res, next){
 app.use("/", indexRoutes);
 app.use("/places/:id/comments", commentRoutes);
 app.use("/places", placeRoutes);
+app.use("/itineraries", itineraryRoutes);
+app.use("/", userRoutes);
+
+// let name = "first itinerary"
+// let image = "https://brightcove04pmdo-a.akamaihd.net/5104226627001/5104226627001_5592940557001_5590734170001-vs.jpg?pubId=5104226627001&videoId=5590734170001"
+// let desc = "test of itinerary data struct"
+// let author = {}
+// let newItinerary = {name: name, image: image, description: desc, author: author};
+
+// Itinerary.create(newItinerary, function(err, itinerary) {
+//     if (err) {
+//         console.log(err);
+//     } else {
+//         console.log(itinerary);
+//     }
+// });
 
 app.listen(process.env.PORT || 3000, function() {
     console.log("TravelBlog Server Running..");

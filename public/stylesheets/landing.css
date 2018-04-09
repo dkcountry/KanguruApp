@@ -40,22 +40,22 @@ body {
 }
 
 .slideshow li:nth-child(1) { 
-    background-image: url(http://i.imgur.com/K3mPv14.jpg) 
+    background-image: url(https://images.unsplash.com/photo-1519677100203-a0e668c92439?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=3061e5dc3cfb5745810dfdc05e8e2db0&auto=format&fit=crop&w=1950&q=80);
   }
   .slideshow li:nth-child(2) { 
-    background-image: url(http://i.imgur.com/SBEmFpv.jpg);
+    background-image: url(https://images.unsplash.com/photo-1497106636505-e4fd6e16d74c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=49ec3232d65c27e39a64c837b7be9832&auto=format&fit=crop&w=2756&q=80);
     animation-delay: 10s; 
   }
   .slideshow li:nth-child(3) { 
-    background-image: url(http://i.imgur.com/emvhOnb.jpg);
+    background-image: url(https://notjustatourist.com/wp-content/uploads/2015/09/cordoba-mezquita41-1.jpg?c=890ca7737572);
     animation-delay: 20s; 
   }
   .slideshow li:nth-child(4) { 
-    background-image: url(http://i.imgur.com/2LSMCmJ.jpg);
+    background-image: url(https://images.unsplash.com/photo-1508804185872-d7badad00f7d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8328e64c55562754fe9e81ae1ee3f4ed&auto=format&fit=crop&w=1950&q=80);
     animation-delay: 30s; 
   }
   .slideshow li:nth-child(5) { 
-    background-image: url(http://i.imgur.com/TVGe0Ef.jpg);
+    background-image: url(https://images.unsplash.com/photo-1415927049573-fd97e6a85684?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=1fd99b2a7e5c742980cfa4a7cec6b77d&auto=format&fit=crop&w=1950&q=80);
     animation-delay: 40s; 
 }
 

@@ -3,10 +3,10 @@
 <div class="container">
     <header class="jumbotron">
         <div class="container">
-            <h1>Places</h1>
-            <p>Explore Cities, Landmarks, Parks</p>
+            <h1><%=itinerary.name%></h1>
+            <p><%=itinerary.description%></p>
             <p>
-                <a class="btn btn-info btn-lg" href="/places/new">New Place</a>
+                <a class="btn btn-info btn-lg" href="/itineraries/<%=itinerary._id%>/newplace">New Place</a>
             </p>
         </div>
     </header>
@@ -14,7 +14,7 @@
 
 <div id='index-places' class="container">
     <div class="row text-center" style="display:flex; flex-wrap: wrap;">
-        <% places.forEach(function(place) { %>
+        <% itinerary.places.forEach(function(place) { %>
             <div class="ind-blog col-sm-12">
                 <div class="col-md-2 col-sm-2">
                     <div class="thumbnail">
@@ -26,7 +26,6 @@
                 </div>
                 <div class=" desc col-md-5 col-sm-5">
                    <p> <%=place.description.substring(0,100) %>... %> </p>
-                   <em>Visited by <%=place.author.username %></em>
                 </div>
                 <div class="col-md-5 col-sm-5" style="text-align: right">
                     <p>

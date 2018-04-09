@@ -1,0 +1,43 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <header class="jumbotron">
+        <div class="container">
+            <h1>Explore the World</h1>
+            <p>Inspired Itineraries from Everyday Users </p>
+            <p>
+                <a class="btn btn-info btn-lg" href="/itineraries/new">New Itinerary</a>
+            </p>
+        </div>
+    </header>
+</div>
+
+<div id='index-blogs' class="container">
+    <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <% itineraries.forEach(function(itinerary) { %>
+            <div class="ind-blog col-sm-12">
+                <div class="col-md-4 col-sm-4">
+                    <div class="thumbnail">
+                        <img src="<%= itinerary.image%>">
+                    </div>
+                    <div class="caption">
+                            <h4><%= itinerary.name %></h4>
+                    </div>
+                </div>
+                <div class=" desc col-md-4 col-sm-4">
+                   <p> <%=itinerary.description.substring(0,100) %>... %> </p>
+                   <em>Visited by <%=itinerary.author.username %></em>
+                </div>
+                <div class="col-md-4 col-sm-4" style="text-align: right">
+                    <p>
+                        <a href="/itineraries/ <%= itinerary._id %>" class="btn btn-info">Read More</a>
+                    </p>
+                </div>
+                <div class='divider'></div>
+            </div>
+        <% }) %>
+    </div>
+
+</div>
+
+<% include ../partials/footer %>
