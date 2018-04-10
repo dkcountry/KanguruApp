@@ -84,5 +84,11 @@ router.post("/:id/newplace", middleware.isLoggedIn, function(req, res){
     });
 });
 
+router.delete("/:id", function(req, res) {
+    Itinerary.findByIdAndRemove(req.params.id.replace(/\s/g,''), function(err){
+        res.redirect("/itineraries");
+    });
+});
+
 
 module.exports = router;
