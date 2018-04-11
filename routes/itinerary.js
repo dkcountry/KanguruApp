@@ -5,8 +5,8 @@ const Place = require("../models/places");
 const middleware = require("../middleware");
 
 //INDEX - show all itineraries
-router.get("/", function(req, res) {
-    Itinerary.find({}, function(err, itineraries) {
+router.get("/", (req, res) => {
+    Itinerary.find({}, (err, itineraries) => {
         if (err) {
             console.log(err);
         } else {
@@ -15,17 +15,17 @@ router.get("/", function(req, res) {
     });
 })
 
-router.post("/", middleware.isLoggedIn, function(req, res) {
-    let name = req.body.name;
-    let image = req.body.image;
-    let desc = req.body.description;
-    let author = {
+router.post("/", middleware.isLoggedIn, (req, res) => {
+    const name = req.body.name;
+    const image = req.body.image;
+    const desc = req.body.description;
+    const author = {
         id: req.user._id,
         username: req.user.username
     };
-    let newItinerary = {name: name, image: image, description: desc, author: author};
+    const newItinerary = {name: name, image: image, description: desc, author: author};
     
-    Itinerary.create(newItinerary, function(err, itinerary) {
+    Itinerary.create(newItinerary, (err, itinerary) => {
         if (err) {
             console.log(err);
         } else {
@@ -35,12 +35,12 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
     });
 });
 
-router.get("/new", middleware.isLoggedIn, function(req, res) {
+router.get("/new", middleware.isLoggedIn, (req, res) => {
     res.render("itineraries/new");
 });
 
-router.get("/:id", function(req, res) {
-    Itinerary.findById(req.params.id.replace(/\s/g,'')).populate("places").exec(function(err, foundItinerary) {
+router.get("/:id", (req, res) => {
+    Itinerary.findById(req.params.id.replace(/\s/g,'')).populate({path: "places", options: {sort: {'date': 1}}}).exec(function(err, foundItinerary) {
         if (err) {
             console.log(err);
         } else {
@@ -49,8 +49,8 @@ router.get("/:id", function(req, res) {
     });
 });
 
-router.get("/:id/newplace", function(req, res) {
-    Itinerary.findById(req.params.id.replace(/\s/g,''), function(err, foundItinerary) {
+router.get("/:id/newplace", (req, res) => {
+    Itinerary.findById(req.params.id.replace(/\s/g,''), (err, foundItinerary) => {
         if (err) {
             console.log(err);
         } else {
@@ -59,8 +59,8 @@ router.get("/:id/newplace", function(req, res) {
     });
 });
 
-router.post("/:id/newplace", middleware.isLoggedIn, function(req, res){
-    Itinerary.findById(req.params.id.replace(/\s/g,''), function(err, itinerary){
+router.post("/:id/newplace", middleware.isLoggedIn, (req, res) => {
+    Itinerary.findById(req.params.id.replace(/\s/g,''), (err, itinerary) => {
         if(err){
             console.log(err);
             res.redirect("/itineraries");
@@ -70,7 +70,7 @@ router.post("/:id/newplace", middleware.isLoggedIn, function(req, res){
                 id: req.user._id,
                 username: req.user.username
             };
-            Place.create(place, function(err, place){
+            Place.create(place, (err, place) => {
                 if(err){
                     console.log(err);
                 } else{
@@ -84,8 +84,8 @@ router.post("/:id/newplace", middleware.isLoggedIn, function(req, res){
     });
 });
 
-router.delete("/:id", function(req, res) {
-    Itinerary.findByIdAndRemove(req.params.id.replace(/\s/g,''), function(err){
+router.delete("/:id", (req, res) => {
+    Itinerary.findByIdAndRemove(req.params.id.replace(/\s/g,''), (err) => {
         res.redirect("/itineraries");
     });
 });

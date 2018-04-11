@@ -15,6 +15,7 @@
 
 <div id='index-blogs' class="container">
     <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+            <h4 class='my-posts-label'>Itineraries</h4>
             <% itineraries.forEach(function(place) { %>
                 <div class="ind-blog col-sm-12">
                     <div class="col-md-4 col-sm-4">
@@ -40,9 +41,10 @@
         </div>
 
     <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <h4 class='my-posts-label'>Places</h4>
         <% places.forEach(function(place) { %>
             <div class="ind-blog col-sm-12">
-                <div class="col-md-4 col-sm-4">
+                <div class="col-md-2 col-sm-2">
                     <div class="thumbnail">
                         <img src="<%= place.image%>">
                     </div>
@@ -50,11 +52,11 @@
                             <h4><%= place.name %></h4>
                     </div>
                 </div>
-                <div class=" desc col-md-4 col-sm-4">
+                <div class=" desc col-md-5 col-sm-5">
                    <p> <%=place.description.substring(0,100) %>... %> </p>
                    <em>Visited by <%=place.author.username %></em>
                 </div>
-                <div class="col-md-4 col-sm-4" style="text-align: right">
+                <div class="col-md-5 col-sm-5" style="text-align: right">
                     <p>
                         <a href="/places/ <%= place._id %>" class="btn btn-primary">Read More</a>
                     </p>

@@ -25,8 +25,12 @@
                     </div>
                 </div>
                 <div class=" desc col-md-5 col-sm-5">
-                   <p> <%=place.description.substring(0,100) %>... %> </p>
-                   <em>Visited by <%=place.author.username %></em>
+                    <p> <%=place.description.substring(0,100) %>... %> </p>
+                    <em>Visited by <%=place.author.username %></em>
+                    <em> on 
+                        <span class='place-date'> <%=place.date%></span>
+                    </em> 
+                    
                 </div>
                 <div class="col-md-5 col-sm-5" style="text-align: right">
                     <p>
@@ -39,5 +43,7 @@
     </div>
 
 </div>
+
+<script type="text/javascript" src="clientJS/dateFormat.js"></script>
 
 <% include ../partials/footer %>

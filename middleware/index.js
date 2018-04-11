@@ -14,7 +14,7 @@ middlewareObj.isLoggedIn = (req, res, next) => {
 
 middlewareObj.checkOwnership = (req, res, next) => {
     if(req.isAuthenticated()){
-        Place.findById(req.params.id.replace(/\s/g,''), function(err, foundPlace){
+        Place.findById(req.params.id.replace(/\s/g,''), (err, foundPlace) => {
             if(err){
                 req.flash("error", "Page not Found");
                 res.redirect("back");
@@ -35,7 +35,7 @@ middlewareObj.checkOwnership = (req, res, next) => {
 
 middlewareObj.checkCommentOwnership = (req, res, next) => {
     if(req.isAuthenticated()){
-        Comment.findById(req.params.comment_id.replace(/\s/g,''), function(err, foundComment){
+        Comment.findById(req.params.comment_id.replace(/\s/g,''), (err, foundComment) => {
             if(err){
                 res.redirect("back");
             } else {

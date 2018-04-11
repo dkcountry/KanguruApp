@@ -6,22 +6,22 @@ const middleware = require("../middleware");
 const User = require("../models/user");
 
 
-router.get("/:user_id", middleware.isLoggedIn, function(req, res) {
-    User.findById(req.params.user_id.replace(/\s/g,''), function(err, foundUser) {
+router.get("/:user_id", middleware.isLoggedIn, (req, res) => {
+    User.findById(req.params.user_id.replace(/\s/g,''), (err, foundUser) => {
         if(err){
             console.log(err);
         } else{
             console.log(foundUser);
             const user = foundUser;
 
-            Itinerary.find({"author.id": user._id}, function(err, foundItineraries){
+            Itinerary.find({"author.id": user._id}, (err, foundItineraries) => {
                 if(err) {
                     console.log(err);
                 } else {
                     const itineraries = foundItineraries;
                     console.log(itineraries);
 
-                    Place.find({"author.id": user._id}, function(err, foundPlaces){
+                    Place.find({"author.id": user._id}, (err, foundPlaces) => {
                         if(err) {
                             console.log(err);
                         } else {

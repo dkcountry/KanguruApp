@@ -29,6 +29,9 @@
                 </div>
                 <div class=" desc col-md-5 col-sm-5">
                    <p> <%=place.description.substring(0,100) %>... %> </p>
+                   <em> Visited on 
+                        <span class='place-date'> <%=place.date%></span>
+                    </em> 
                    <% if(currentUser && place.author.id.equals(currentUser._id)) { %>
                     <a class="btn btn-xs btn-warning" href="/places/<%=place._id%>/edit">Edit</a>
                     <form class="delete-form" action="/places/<%=place._id%>?_method=DELETE" method="POST">
@@ -47,5 +50,7 @@
     </div>
 
 </div>
+
+<script type="text/javascript" src="../clientJS/dateFormat.js"></script>
 
 <% include ../partials/footer %>

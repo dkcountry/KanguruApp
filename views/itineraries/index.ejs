@@ -26,7 +26,8 @@
                 </div>
                 <div class=" desc col-md-4 col-sm-4">
                    <p> <%=itinerary.description.substring(0,100) %>... %> </p>
-                   <em>Visited by <%=itinerary.author.username %></em>
+                   <em>Created by <%=itinerary.author.username %></em>
+                   <em>on <%=itinerary.created.toDateString()%></em>
                 </div>
                 <div class="col-md-4 col-sm-4" style="text-align: right">
                     <p>

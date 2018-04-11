@@ -22,19 +22,19 @@ let data = [
  
 function seedDB(){
    //Remove all places
-   Place.remove({}, function(err){
+   Place.remove({}, (err) => {
         if(err){
             console.log(err);
         }
         console.log("removed places!");
-        Comment.remove({}, function(err) {
+        Comment.remove({}, (err) => {
             if(err){
                 console.log(err);
             }
             console.log("removed comments!");
              //add a few places
-            data.forEach(function(seed){
-                Place.create(seed, function(err, place){
+            data.forEach((seed) => {
+                Place.create(seed, (err, place) => {
                     if(err){
                         console.log(err)
                     } else {
@@ -44,7 +44,7 @@ function seedDB(){
                             {
                                 text: "This place is great, but I wish there was internet",
                                 author: "Homer"
-                            }, function(err, comment){
+                            }, (err, comment) => {
                                 if(err){
                                     console.log(err);
                                 } else {
